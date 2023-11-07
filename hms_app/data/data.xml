@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Sequence for book ref -->
+        <record id="patient_ref_seq" model="ir.sequence">
+            <field name="name">patient Ref No.</field>
+            <field name="code">patient_ref_seq</field>
+            <field name="prefix">abc</field>
+            <field name="padding">4</field>
+        </record>
+
+    </data>
+</odoo>

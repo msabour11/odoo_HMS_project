@@ -1,0 +1,112 @@
+<odoo>
+    <record id="view_tree_patient" model="ir.ui.view">
+        <field name="name">Patient Tree</field>
+        <field name="model">hms.patient</field>
+        <field name="arch" type="xml">
+<!--            <tree editable="top">-->
+            <tree >
+                <field name="fname"/>
+                <field name="lname"/>
+                <field name="birth_date"/>
+                <field name="age"/>
+                <field name="address"/>
+                <field name="blode"/>
+                <field name="pcr" widget="boolean_toggle"/>
+                <field name="cr"/>
+                <field name="state"/>
+<!--                <field name="history"/>-->
+                <field name="department_id"/>
+                <field name="doctor_ids" groups="hms_app.hms_manager"/>
+                <field name="department_capacity"/>
+                <field name="doctor_fnames" groups="hms_app.hms_manager"/>
+<!--                <field name="image"/>-->
+<!--                <field name="ref"/>-->
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_form_patient" model="ir.ui.view">
+        <field name="name">Patient Form</field>
+        <field name="model">hms.patient</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                     <div class="oe_title" >
+                        <h1>
+                            <field name="ref" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="General Info.">
+                            <field name="fname"/>
+                            <field name="lname"/>
+                            <field name="age" attrs="{'readonly':[('fname','=','ali')]}"/>
+                            <field name="address"/>
+                            <field name="email"/>
+
+<!--                            <field name="ref" readonly="1"/>-->
+                            <field name="department_id"/>
+                            <field name="doctor_ids" />
+                            <field name="department_capacity"/>
+                            <field name="doctor_fnames" />
+                        </group>
+                        <group string="Additional Info.">
+                            <field name="birth_date"/>
+                            <field name="blode"/>
+                            <field name="pcr"/>
+                            <field name="cr"/>
+                            <field name="state"/>
+                            <field name="history" widget="html"  options="{'no_create': True, 'no_edit': True}"/>
+                            <field name="image" widget="image"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="History Log">
+                            <field name="line_ids">
+<!--                                <tree editable="bottom">-->
+<!--                                    <field name="fname"/>-->
+<!--                                    <field name="birth_date"/>-->
+<!--                                    <field name="note"/>-->
+<!--                                </tree>-->
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                  <!--Email threats-->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_search_patient" model="ir.ui.view">
+        <field name="name">Patient Search</field>
+        <field name="model">hms.patient</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="fname"/>
+                <field name="age"/>
+<!--                custom filter on pcr field-->
+                <filter name="pcr" string="Has PCR" domain="[('pcr', '=', True)]"/>
+                <filter name="pcr" string="Don't has  PCR" domain="[('pcr', '!=', True)]"/>
+
+<!--                <filter name="date" string="Date" context="{'group_by':'date_published'}"/>-->
+<!--                <filter name="active" string="Active" context="{'group_by':'active'}"/>-->
+            </search>
+        </field>
+    </record>
+
+    <record id="action_hms_patient" model="ir.actions.act_window">
+        <field name="name">Hms Patient</field>
+        <field name="res_model">hms.patient</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menuitem_hms_patient"
+              name="All Ptients"
+              parent="menu_root_patient"
+              action="action_hms_patient"/>
+</odoo>

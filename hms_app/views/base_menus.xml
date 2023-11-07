@@ -1,0 +1,23 @@
+<odoo>
+    <menuitem id="menu_hms"
+              name="HMS app"/>
+    <menuitem id="menu_root_patient"
+              name="Patients"
+              parent="menu_hms"
+    sequence="0"/>
+<menuitem id="menu_root_department"
+              name="Department"
+              parent="menu_hms"
+ action="action_hms_department"
+  sequence="2"/>
+
+    <menuitem id="menu_root_doctor"
+              name="Doctor"
+              parent="menu_hms"
+    action="action_hms_doctor"
+      sequence="1"
+   groups="hms_app.hms_manager"/>
+
+
+
+</odoo>
